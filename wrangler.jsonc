@@ -11,7 +11,7 @@
 
 			// The domain you'd like to use.
 			// https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#custom-domain---required
-			"pattern": "fi1.io", /* CHANGE THIS */
+			"pattern": "nahb1t.ch", /* CHANGE THIS */
 			"custom_domain": true
 		}
 	],
@@ -23,7 +23,7 @@
 
 			// The CloudFlare R2 bucket name you'd like to use.
 			// https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#r2-bucket
-			"bucket_name": "sharex-worker" /* CHANGE THIS */
+			"bucket_name": "sharex" /* CHANGE THIS */
 		}
 	],
 
@@ -33,14 +33,14 @@
 
 			// The CloudFlare KV ID you'd like to use
 			// https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#kv-namespace---required
-			"id": "c9d3219d64cc45aa92a6bf6bdcd2728a" /* CHANGE THIS */
+			"id": "fbe47483080b4dd2b63d7ed5d3fbfd19" /* CHANGE THIS */
 		}
 	],
 
 	"vars": {
 		// URL to your CloudFlare R2 bucket.
 		//https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#r2_url---required
-		"R2_URL": "https://r2.fi1.io", /* CHANGE THIS */
+		"R2_URL": "https://r2.nahb1t.ch", /* CHANGE THIS */
 
 		// How to structure uploaded files in your R2 bucket
 		"R2_FOLDER_FORMAT": "YYYY/MM/DD",
@@ -51,9 +51,9 @@
 		// How long shares last for: Default 2w
 		"SHARE_TTL": 1209600,
 		// Min length for share URLs
-		"SHARE_SLUG_LEN_MIN": 6,
+		"SHARE_SLUG_LEN_MIN": 8,
 		// Max lenth for share URLs
-		"SHARE_SLUG_LEN_MAX": 10,
+		"SHARE_SLUG_LEN_MAX": 14,
 		// Append a file extension to upload urls
 		"SHARE_SLUG_FILE_EXT": true
 	},
