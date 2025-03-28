@@ -55,7 +55,7 @@
 		// Max lenth for share URLs
 		"SHARE_SLUG_LEN_MAX": 14,
 		// Append a file extension to upload urls
-		"SHARE_SLUG_FILE_EXT": true
+		"SHARE_SLUG_FILE_EXT": false
 	},
 
 
