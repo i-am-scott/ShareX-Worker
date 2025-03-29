@@ -10,12 +10,9 @@ apiStore.isPageLoaded = true;
 </script>
 
 <template>
-	<div class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
-		<ShareHistory/>
-	</div>
-
-	<!-- Just plop this here at the bottom! -->
-	<div class="flex min-h-100 flex-col items-center justify-center bg-background md:p-5">
+	<div class="flex flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
+		<!-- Just plop this here at the top! -->
 		<ConfigDownloader/>
+		<ShareHistory/>
 	</div>
 </template>

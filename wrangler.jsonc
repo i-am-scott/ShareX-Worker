@@ -71,6 +71,7 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "sharex-worker",
 	"workers_dev": false,
+	"preview_urls": false,
 	"compatibility_flags": [
 		"nodejs_compat"
 	],

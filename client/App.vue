@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import AppSidebar from '@/components/NavSidebar.vue'
-import OptionsSidebar from '@/components/OptionsSidebar.vue'
-import { SidebarProvider } from '@/components/ui/sidebar'
+import UpdateAlert from '@/components/UpdateAlert.vue';
 import LoadingSpinny from '@/components/LoadingSpinny.vue';
+import OptionsSidebar from '@/components/OptionsSidebar.vue'
+
+import { SidebarProvider } from '@/components/ui/sidebar';
+
 import { useApiStore } from '@/stores/api';
+import { onMounted, } from 'vue';
+
 const apiStore = useApiStore();
 
+onMounted(async () => {
+	await apiStore.checkForUpdates();
+})
 </script>
 
 <template>
@@ -13,6 +21,8 @@ const apiStore = useApiStore();
 		<AppSidebar/>
 
 		<main>
+			<UpdateAlert v-if="apiStore.updateAvailable"/>
+
 			<!--<SidebarTrigger v-show="sidebarNotOpen" />-->
 
 			<LoadingSpinny v-show="!apiStore.isPageLoaded"/>

@@ -1,6 +1,6 @@
 {
 	"name": "sharex-worker",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"homepage": "https://github.com/aStonePenguin/ShareX-Worker",
 	"private": true,
 	"type": "module",
@@ -23,6 +23,7 @@
 		"mime-types": "^2.1.35",
 		"moment": "^2.30.1",
 		"monaco-editor": "^0.52.2",
+		"motion-v": "^0.13.1",
 		"pinia": "^3.0.1",
 		"reka-ui": "^2.1.1",
 		"tailwind-merge": "^3.0.2",

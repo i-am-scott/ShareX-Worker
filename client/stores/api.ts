@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { Http } from '@/utils/http';
+import { Helpers } from '~/helpers';
 import { Share } from '~/share';
 import router from '@/router';
 import type { ApiResponse } from '~/apiresponse';
@@ -8,6 +9,10 @@ import type { ApiResponse } from '~/apiresponse';
 export const useApiStore = defineStore('api', {
 	state: () => ({
 		isAuthed: document.cookie.includes('auth_expire'),
+
+		// obnoxious
+		updateAvailable: false,
+		updateVersion: undefined as string | undefined,
 
 		// global load spiny!
 		isPageLoaded: false,
@@ -22,6 +27,33 @@ export const useApiStore = defineStore('api', {
 	}),
 	actions:
 	{
+		// check updates
+		async checkForUpdates()
+		{
+			if (this.isAuthed)
+			{
+				const nextUpdateCheck = localStorage.getItem('nextUpdateCheck');
+
+				if (nextUpdateCheck == null || parseInt(nextUpdateCheck) <= Date.now())
+				{
+					const resp = await fetch("https://api.github.com/repos/aStonePenguin/ShareX-Worker/releases/latest")
+					const data = await resp.json();
+
+					if (data != null && data.tag_name)
+					{
+						this.updateVersion = data.tag_name;
+						this.updateAvailable = Helpers.isNewerVersion(APP_VERSION, data.tag_name);
+
+					}
+
+					// annoy again in an hour
+					const nextCheckDate = Date.now() + 3600000;
+
+					localStorage.setItem('nextUpdateCheck', nextCheckDate.toString())
+				}
+			}
+		},
+
 		// apis
 		async getShares()
 		{

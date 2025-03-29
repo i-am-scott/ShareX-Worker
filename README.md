@@ -1,6 +1,8 @@
 # ShareX-Worker
 ShareX-Worker is a companion file sharing and URL shortening website for [ShareX](https://getsharex.com/) that runs on [CloudFlare Workers](https://www.cloudflare.com/developer-platform/products/workers/).
 
+
+
 ## Features
 - Create & manage shares
 	- Upload files
@@ -12,10 +14,10 @@ ShareX-Worker is a companion file sharing and URL shortening website for [ShareX
 - Download ShareX custom uploader configs from the dashboard
 
 ## Setup
+- You will need to link a credit card with CloudFlare, however normal usage of this will fall under the free tier.
 - [Fork](https://github.com/aStonePenguin/ShareX-Worker/fork) this repository.
 - Sign up for [CloudFlare](https://www.cloudflare.com/) and setup your domain there if you already haven't.
-	- Navigate to your domain, "Security", "WAF" and finally the "Rate limiting rules" tab.
-		- Click "Create Rule".
+	- Navigate to your domain, "Security", "Security rules", make sure "Show all rule types" is enabled and finally click "Create rule" next to "Rate limiting rules"
 		- Give it a name.
 		- Click "Edit Expression" and paste the following: `(not http.request.uri.path contains "/assets")`.
 		- Set "Requests" to 20 (you can raise this in the future if it's too low).
@@ -29,7 +31,7 @@ ShareX-Worker is a companion file sharing and URL shortening website for [ShareX
 		- Click "Add CORS policy" and add "https://yourdomain.com" under "AllowedOrigins" then save.
 
 - Open `wrangler.jsonc` on your repository fork and change all settings with a "CHANGE THIS" comment beside them. You may change the optional settings at this time as well. Commit/save the file.
-- Head back to the CloudFlare dashboard, navigate to "Workers & Pages", click "Create" and finally import the repository you created earlier. When prompted to "Configure your project" use the default settings.
+- Head back to the CloudFlare dashboard, navigate to "Workers & Pages", click "Create" and finally import the repository you created earlier **by connecting your GitHub account.** If you don't connect your GitHub account you won't be able to merge changes to update it. When prompted to "Configure your project" use the default settings.
 	- Wait for your worker to build and deploy. This will take a few minutes.
 	- Open the worker you just created, head to the settings tab and under "Variables and Secrets" add an [`API_KEY`](https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#api_key---required) and [`SESSION_KEY`](https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#session_key---required) as described below under settings.
 
@@ -105,7 +107,8 @@ Settings that are marked as optional do not need to be changed if you don't want
 
 
 ## Editing / Contributing
-Edit `wrangler.jsonc` with the settings above.
+- Edit `wrangler.jsonc` with the settings above.
+- Create a .dev.vars file with an api and sesssion key.
 
 ### Install
 ```sh
