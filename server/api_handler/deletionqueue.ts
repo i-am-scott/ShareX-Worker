@@ -10,7 +10,7 @@ export class DeletionQueue {
 	{
 		await this.env.KV.put('DeletionQueue:' + urlSlug, "", {
 			metadata: {
-				expirationTtl: metadata.expirationTtl,
+				expirationTtl: Date.now() + (metadata.expirationTtl * 1000),
 				filePath: metadata.filePath
 			}
 		});
@@ -18,14 +18,13 @@ export class DeletionQueue {
 
 	public async proccess()
 	{
-		const utcNow = Date.now() / 1000;
-
 		const objects = await this.env.KV.list({
 			prefix: 'DeletionQueue:'
 		})
 
 		let count = 0;
 		const fileQueue = [];
+		const utcNow = Date.now();
 		for (const object of objects.keys)
 		{
 			if (object.metadata == null)

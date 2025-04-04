@@ -11,8 +11,6 @@ import { vite as vidstack } from 'vidstack/plugins';
 import autoprefixer from 'autoprefixer'
 import tailwind from 'tailwindcss'
 
-declare const __APP_VERSION__: string
-
 // https://vite.dev/config/
 export default defineConfig({
 	css: {
