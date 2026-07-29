@@ -40,4 +40,17 @@ export class Helpers {
 
 		return false
 	}
+
+	protected static htmlEscapes: Record<string, string> = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		"'": '&#39;'
+	};
+
+	public static escapeHtml(input: string): string
+	{
+		return input.replace(/[&<>"']/g, (char) => Helpers.htmlEscapes[char]);
+	}
 }

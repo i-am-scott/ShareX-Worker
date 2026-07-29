@@ -15,11 +15,14 @@ class Helpers extends SharedHelpers {
 		lenMin = Math.min(lenMin, lenMax);
 		lenMax = Math.max(lenMax, lenMin);
 
-		const len = Math.floor(Math.random() * (lenMax - lenMin + 1) + lenMin);
+		const range = lenMax - lenMin + 1;
+		const len = lenMin + (crypto.getRandomValues(new Uint32Array(1))[0] % range);
+
+		const bytes = crypto.getRandomValues(new Uint8Array(len));
 
 		let result = '';
 		for (let i = 0; i < len; i++)
-			result += this.chars.charAt(Math.floor(Math.random() * this.chars.length));
+			result += this.chars.charAt(bytes[i] % this.chars.length);
 
 		return result;
 	}

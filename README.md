@@ -69,11 +69,11 @@ Settings that are marked as optional do not need to be changed if you don't want
 - true or false
 - Determines whether to append the file extension of the file you have uploaded to the URL. Whether this is enabled or not share URLs with file extensions of any type will still load. Example: yourdomain.com/thisIsTheSlug.png or yourdomain.com/thisIsTheSlug
 
-#### `SHARE_SLUG_LEN_MAX` - ***Optional***
-- The max length of the url slug. Exmaple yourdomain.com/thisIsTheSlug
-
 #### `SHARE_SLUG_LEN_MIN` - ***Optional***
-- The min length of the url slu. Exmaple yourdomain.com/thisIsTheSlug
+- The min length of the url slug. Must be greater than default. Default is 6. Exmaple yourdomain.com/thisIsTheSlug
+
+#### `SHARE_SLUG_LEN_MAX` - ***Optional***
+- The max length of the url slug. Must be greater than or equal to [`SHARE_SLUG_LEN_MIN`](https://github.com/aStonePenguin/ShareX-Worker#share_slug_len_min---optional). Default is 10. Exmaple yourdomain.com/thisIsTheSlug
 
 #### `SHARE_TTL` - ***Optional***
 - How long to store files and shortened URLs for in seconds before automatically deleting them. Default is 2 weeks.

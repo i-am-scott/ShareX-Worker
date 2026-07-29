@@ -29,6 +29,8 @@ const app = new Hono<{ Bindings: Env, Variables: Variables }>();
 
 app.use(async (c, next) => {
 	const env = c.env as any;
+
+	// Do some idiot proofing.
 	if (env.API_KEY == null)
 		return c.text('API_KEY is not set!\nhttps://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#api_key---required', 503);
 
@@ -40,6 +42,12 @@ app.use(async (c, next) => {
 
 	if (env.SESSION_KEY.length < 256 || env.SESSION_KEY.length > 512)
 		return c.text('SESSION_KEY needs to be 256-512 characters!\nhttps://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#session_key---required', 503);
+
+	if (env.SHARE_SLUG_LEN_MIN < 6)
+		return c.text('SHARE_SLUG_LEN_MIN needs to be at least 6 characters!\nhttps://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#share_slug_len_min---optional', 503);
+
+	if (env.SHARE_SLUG_LEN_MAX < env.SHARE_SLUG_LEN_MIN)
+		return c.text('SHARE_SLUG_LEN_MAX needs to be greater than or equal to SHARE_SLUG_LEN_MIN!\nhttps://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#share_slug_len_max---optional', 503);
 
 
 	const sessionHandler = new SessionHandler(c);
@@ -83,8 +91,8 @@ app.get(urlSlugPath, async (c) => {
 			const tagGen = new OpenGraphTagGen();
 
 			const html = (await resp.text())
-				.replace('<title>ShareX-Worker</title>', '<title>' + share.fileName + '</title>')
-				.replace('/favicon.ico', '/svg/' + share.fileExtension + '.svg')
+				.replace('<title>ShareX-Worker</title>', '<title>' + Helpers.escapeHtml(share.fileName!) + '</title>')
+				.replace('/favicon.ico', '/svg/' + Helpers.escapeHtml(share.fileExtension!) + '.svg')
 				.replace('<meta property="og:title" content="Home"/>', tagGen.getTags(new URL(c.req.url), share));
 
 			return c.html(html, resp);

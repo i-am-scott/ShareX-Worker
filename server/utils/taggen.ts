@@ -6,17 +6,17 @@ import { Helpers } from './helpers';
 export class OpenGraphTagGen {
 	protected tags = '';
 
-	protected addTag(property: String, content: string)
+	protected addTag(property: string, content: string)
 	{
 		this.tags += '<meta property="' + property + '" content="' + content + '"/>\n';
 	}
 
-	protected addOgTag(property: String, content: string) // https://ogp.me/
+	protected addOgTag(property: string, content: string) // https://ogp.me/
 	{
 		this.addTag('og:' + property, content);
 	}
 
-	protected addXTag(property: String, content: string) // https://developer.x.com/en/docs/x-for-websites/cards/overview/markup
+	protected addXTag(property: string, content: string) // https://developer.x.com/en/docs/x-for-websites/cards/overview/markup
 	{
 		this.addTag('twitter:' + property, content);
 	}
