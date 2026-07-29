@@ -108,7 +108,8 @@ Settings that are marked as optional do not need to be changed if you don't want
 
 ## Editing / Contributing
 - Edit `wrangler.jsonc` with the settings above.
-- Create a .dev.vars file with an api and sesssion key.
+- Create a .dev.vars file with an [`API_KEY`](https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#api_key---required) and [`SESSION_KEY`](https://github.com/aStonePenguin/ShareX-Worker/blob/master/README.md#session_key---required)
+- Add `DEV_MODE="true"` to your .dev.vars file for local testing. Never set this when deploying.
 
 ### Install
 ```sh

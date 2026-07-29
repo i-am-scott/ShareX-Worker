@@ -1,42 +1,32 @@
 import type { Shareable } from './shareable'
 
 export class Share implements Shareable {
+	public readonly url?: string;
+	public readonly fileName?: string;
+	public readonly fileExtension?: string;
+	public readonly filePath?: string;
+	public readonly urlSlug?: string;
+	public readonly storageUrl?: string;
+	public readonly contentType?: string;
+	public readonly contentSize?: number;
+	public readonly contentMd5?: string;
+	public readonly deletetionKey?: string;
+	public readonly creationDate?: number;
+	public readonly expirationTtl?: number;
+
 	get fileUrl(): string
 	{
 		return this.storageUrl + '/' + this.filePath;
 	}
 
-	public constructor(
-		public readonly url?: string,
-		public readonly fileName?: string,
-		public readonly fileExtension?: string,
-		public readonly filePath?: string,
-		public readonly urlSlug?: string,
-		public readonly storageUrl?: string,
-		public readonly contentType?: string,
-		public readonly contentSize?: number,
-		public readonly contentMd5?: string,
-		public readonly deletetionKey?: string,
-		public readonly creationDate?: number,
-		public readonly expirationTtl?: number
-	) { }
+	public constructor(shareable: Shareable = {})
+	{
+		Object.assign(this, shareable);
+	}
 
 	public static fromShareable(shareable: Shareable)
 	{
-		return new Share(
-			shareable.url,
-			shareable.fileName,
-			shareable.fileExtension,
-			shareable.filePath,
-			shareable.urlSlug,
-			shareable.storageUrl,
-			shareable.contentType,
-			shareable.contentSize,
-			shareable.contentMd5,
-			shareable.deletetionKey,
-			shareable.creationDate,
-			shareable.expirationTtl
-		);
+		return new Share(shareable);
 	}
 
 	public isUrl(): boolean

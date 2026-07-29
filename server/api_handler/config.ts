@@ -22,45 +22,45 @@ interface ShareXConfig {
 }
 
 export class ConfigHandler extends ApiHandler {
+	protected baseConfig(name: string, destinationType: string, requestPath: string): Omit<ShareXConfig, 'Headers' | 'Body'>
+	{
+		return {
+			Version: '17.0.0',
+			Name: this.url.hostname + ' - ' + name,
+			DestinationType: destinationType,
+			RequestMethod: 'POST',
+			RequestURL: this.url.origin + requestPath,
+			URL: '{json:data.url}',
+			DeletionURL: '{json:data.deletetionUrl}',
+			ErrorMessage: '{json:error}'
+		};
+	}
+
 	public exportUploader()
 	{
-		const uploaderCondig: ShareXConfig = {
-			Version: '17.0.0',
-			Name: this.url.hostname + ' - Uploader',
-			DestinationType: 'ImageUploader, TextUploader, FileUploader',
-			RequestMethod: 'POST',
-			RequestURL: this.url.origin + '/api/upload',
+		const config: ShareXConfig = {
+			...this.baseConfig('Uploader', 'ImageUploader, TextUploader, FileUploader', '/api/upload'),
 			Headers: {
 				API_KEY: this.context.env.API_KEY,
 				FILE_NAME: '{filename}'
 			},
 			Body: 'Binary',
-			URL: '{json:data.url}',
-			DeletionURL: '{json:data.deletetionUrl}',
-			ErrorMessage: '{json:error}'
 		}
 
-		return this.responseSuccess(uploaderCondig);
+		return this.responseSuccess(config);
 	}
 
 	public exportShortener()
 	{
-		const uploaderCondig: ShareXConfig = {
-			Version: '17.0.0',
-			Name: this.url.hostname + ' - Shortener',
-			DestinationType: 'URLShortener',
-			RequestMethod: 'POST',
-			RequestURL: this.url.origin + '/api/shorten',
+		const config: ShareXConfig = {
+			...this.baseConfig('Shortener', 'URLShortener', '/api/shorten'),
 			Headers: {
 				API_KEY: this.context.env.API_KEY,
 				URL: '{input}'
 			},
-			URL: '{json:data.url}',
-			DeletionURL: '{json:data.deletetionUrl}',
-			ErrorMessage: '{json:error}'
 		}
 
-		return this.responseSuccess(uploaderCondig);
+		return this.responseSuccess(config);
 	}
 }
 

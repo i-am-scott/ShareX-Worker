@@ -21,6 +21,8 @@ import { Label } from '@/components/ui/label'
 
 import { Ban } from 'lucide-vue-next'
 
+import CenteredPage from '@/components/CenteredPage.vue'
+
 import { ref } from 'vue'
 
 import { useApiStore } from '@/stores/api';
@@ -45,9 +47,7 @@ apiStore.isPageLoaded = true;
 </script>
 
 <template>
-
-	<div class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
-
+	<CenteredPage>
 		<div class="w-full max-w-sm">
 			<img src="@/assets/cloud.svg" class="mx-auto w-32 h-32" alt="Cloud">
 
@@ -79,5 +79,5 @@ apiStore.isPageLoaded = true;
 				</Card>
 			</form>
 		</div>
-	</div>
+	</CenteredPage>
 </template>

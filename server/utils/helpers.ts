@@ -5,6 +5,11 @@ import mime from 'mime-types';
 class Helpers extends SharedHelpers {
 	protected static chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
+	public static isDevMode(env: Env): boolean
+	{
+		return env.DEV_MODE === 'true';
+	}
+
 	public static randomChars(lenMin: number, lenMax: number): string
 	{
 		lenMin = Math.min(lenMin, lenMax);

@@ -7,6 +7,7 @@ import {
 
 import {
 	FileIcon,
+	Helpers,
 	OpenGraphTagGen
 } from './utils';
 
@@ -146,7 +147,7 @@ app.get('/api/export/shorten', async (c) => {
 // Simulate R2 for local dev
 app.get('/r2/*', async (c) => {
 	const env = c.env as any;
-	if (env.API_KEY !== 'devapikey_devapikey_devapikey_devapikey_devapikey_devapikey_devapikey') // typescript is almost as dumb as javascript
+	if (!Helpers.isDevMode(env))
 		return new Response('not allowed', { status: 403 })
 
 	const key = c.req.path.substring('/r2/'.length)

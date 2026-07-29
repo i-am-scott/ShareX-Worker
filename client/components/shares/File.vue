@@ -3,6 +3,7 @@ import { Share } from '~/share';
 import FileIcon from '@/components/FileIcon.vue';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import CenteredPage from '@/components/CenteredPage.vue'
 import { Download } from 'lucide-vue-next';
 
 import { Helpers } from '~/helpers';
@@ -17,7 +18,7 @@ apiStore.isPageLoaded = true;
 </script>
 
 <template>
-	<div class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
+	<CenteredPage>
 		<FileIcon :share="share"/>
 
 		<div class="w-full max-w-sm">
@@ -38,5 +39,5 @@ apiStore.isPageLoaded = true;
 
 			</Card>
 		</div>
-	</div>
+	</CenteredPage>
 </template>

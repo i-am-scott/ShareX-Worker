@@ -17,10 +17,10 @@ export class ShareHandler extends ApiHandler {
 			return null;
 
 		// Simulate R2 for local dev
-		if (this.context.env.API_KEY !== 'devapikey_devapikey_devapikey_devapikey_devapikey_devapikey_devapikey')
-			shareable.storageUrl = this.context.env.R2_URL;
-		else
+		if (Helpers.isDevMode(this.context.env))
 			shareable.storageUrl = this.url.origin + '/r2';
+		else
+			shareable.storageUrl = this.context.env.R2_URL;
 
 		return shareable as Shareable;
 	}

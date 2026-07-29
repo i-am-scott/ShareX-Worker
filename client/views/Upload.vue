@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/file-upload';
 
 import { Button } from '@/components/ui/button'
+import CenteredPage from '@/components/CenteredPage.vue'
 
 import { ref } from 'vue';
 
@@ -40,7 +41,7 @@ const onSubmit = async () => {
 </script>
 
 <template>
-	<div class="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
+	<CenteredPage>
 		<div class="w-full max-w-sm">
 			<Card class="w-full max-w-sm">
 
@@ -54,5 +55,5 @@ const onSubmit = async () => {
 				</CardFooter>
 			</Card>
 		</div>
-	</div>
+	</CenteredPage>
 </template>
