@@ -45,8 +45,8 @@
 		// How to structure uploaded files in your R2 bucket
 		"R2_FOLDER_FORMAT": "YYYY/MM/DD",
 
-		// How long sessions last for in seconds: Default 2w
-		"SESSION_TTL": 1209600,
+		// How long sessions last for in seconds. Default is 3 months.
+		"SESSION_TTL": 7884000,
 
 		// How long shares last for: Default 2w
 		"SHARE_TTL": 1209600,
