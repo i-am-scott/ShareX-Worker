@@ -41,6 +41,15 @@ export default defineConfig({
 	},
 	build: {
 		chunkSizeWarningLimit: 4500,
+		commonjsOptions: {
+			// @vscode/vscode-languagedetection ships a webpack bundle whose chunk
+			// loader does `require("./" + chunkId + ".js")` for its tfjs backend
+			// chunk. Rollup can't resolve that statically, so point it at the file
+			// directly instead of leaving @rollup/plugin-commonjs throw at runtime.
+			dynamicRequireTargets: [
+				'node_modules/@vscode/vscode-languagedetection/dist/lib/*.js',
+			],
+		},
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
