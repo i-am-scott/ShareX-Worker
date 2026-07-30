@@ -1,6 +1,6 @@
 {
 	"name": "sharex-worker",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"homepage": "https://github.com/aStonePenguin/ShareX-Worker",
 	"private": true,
 	"type": "module",
@@ -8,7 +8,7 @@
 		"dev": "vite",
 		"build": "npx wrangler types && run-s type-check \"build-only {@}\" --",
 		"preview": "npm run build && wrangler dev",
-		"build-only": "vite build",
+		"build-only": "cross-env NODE_OPTIONS=--max-old-space-size=6144 vite build",
 		"generate-types": "wrangler types",
 		"type-check": "vue-tsc --build",
 		"deploy": "npm run build && wrangler deploy"
@@ -43,6 +43,7 @@
 		"@vitejs/plugin-vue": "^6.0.8",
 		"@vue/tsconfig": "^0.9.1",
 		"autoprefixer": "^10.4.21",
+		"cross-env": "^10.1.0",
 		"npm-run-all2": "^8.0.4",
 		"tailwindcss": "^3.4.17",
 		"typescript": "^5.9.3",
