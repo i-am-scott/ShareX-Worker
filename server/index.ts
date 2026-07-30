@@ -164,6 +164,8 @@ app.get('/r2/*', async (c) => {
 	if (!file) throw new Response("file not found", { status: 404 })
 	const headers = new Headers()
 	headers.append('etag', file.httpEtag)
+	if (file.httpMetadata?.contentType)
+		headers.append('content-type', file.httpMetadata.contentType)
 	return new Response(file.body, {
 		headers,
 	})
