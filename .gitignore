@@ -36,3 +36,4 @@ coverage
 
 # misc
 ./dist
+worker-configuration.d.ts
