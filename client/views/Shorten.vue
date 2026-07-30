@@ -24,7 +24,7 @@ import {
 	AlertTitle
 } from '@/components/ui/alert'
 
-import { Ban, Copy } from 'lucide-vue-next'
+import { Ban, Copy } from '@lucide/vue'
 
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'

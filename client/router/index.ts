@@ -5,7 +5,7 @@ import { useApiStore } from '@/stores/api';
 
 
 // https://lucide.dev/icons/
-import { House, UploadCloud, Link, KeyRound } from 'lucide-vue-next';
+import { House, UploadCloud, Link, KeyRound } from '@lucide/vue';
 
 
 // Metadata

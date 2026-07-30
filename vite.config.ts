@@ -38,5 +38,16 @@ export default defineConfig({
 	},
 	define: {
 		'APP_VERSION': JSON.stringify(process.env.npm_package_version),
-	}
+	},
+	build: {
+		chunkSizeWarningLimit: 4500,
+		rollupOptions: {
+			output: {
+				manualChunks(id) {
+					if (id.includes('node_modules/monaco-editor'))
+						return 'monaco';
+				},
+			},
+		},
+	},
 })

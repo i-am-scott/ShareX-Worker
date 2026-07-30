@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-import { Ban } from 'lucide-vue-next'
+import { Ban } from '@lucide/vue'
 
 import CenteredPage from '@/components/CenteredPage.vue'
 

@@ -130,7 +130,7 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue';
 import { cn } from '@/lib/utils';
-import { Upload } from 'lucide-vue-next';
+import { Upload } from '@lucide/vue';
 import { Motion } from 'motion-v';
 import { ref } from 'vue';
 

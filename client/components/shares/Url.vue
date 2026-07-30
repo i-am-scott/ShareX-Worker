@@ -9,7 +9,7 @@ import {
 
 import { Button } from '@/components/ui/button'
 import CenteredPage from '@/components/CenteredPage.vue'
-import { Link } from 'lucide-vue-next'
+import { Link } from '@lucide/vue'
 
 import { useApiStore } from '@/stores/api';
 import { Share } from '~/share'

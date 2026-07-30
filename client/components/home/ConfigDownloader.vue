@@ -7,7 +7,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button';
-import { FolderCog } from 'lucide-vue-next';
+import { FolderCog } from '@lucide/vue';
 
 
 import { useApiStore } from '@/stores/api';

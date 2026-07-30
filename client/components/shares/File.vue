@@ -4,7 +4,7 @@ import FileIcon from '@/components/FileIcon.vue';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import CenteredPage from '@/components/CenteredPage.vue'
-import { Download } from 'lucide-vue-next';
+import { Download } from '@lucide/vue';
 
 import { Helpers } from '~/helpers';
 import { useApiStore } from '@/stores/api';

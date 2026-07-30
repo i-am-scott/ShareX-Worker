@@ -10,7 +10,7 @@ import {
 	SidebarFooter
 } from '@/components/ui/sidebar'
 
-import { LogOut } from 'lucide-vue-next';
+import { LogOut } from '@lucide/vue';
 
 import router from '@/router';
 import { computed, } from 'vue'

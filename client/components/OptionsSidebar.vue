@@ -28,7 +28,7 @@ import {
 	FilePlus2,
 	Link,
 	Trash2
-} from 'lucide-vue-next';
+} from '@lucide/vue';
 
 import { useApiStore } from '@/stores/api';
 const apiStore = useApiStore();
