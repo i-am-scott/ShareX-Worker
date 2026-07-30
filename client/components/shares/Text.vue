@@ -43,7 +43,7 @@ const editorContainer = ref<null | HTMLElement>(null);
 onMounted(async () => {
 	const resp = await fetch(new URL(share?.fileUrl as string));
 	const text = await resp.text();
-	const langGuesser = new MonacoLanguageGuesser(share!);
+	const langGuesser = new MonacoLanguageGuesser(share!, text);
 
 	const editor = monaco.editor.create(editorContainer.value!, {
 		theme: 'vs-dark',
@@ -64,7 +64,7 @@ onMounted(async () => {
 
 	editor.setModel(monaco.editor.createModel(
 		text,
-		langGuesser.guess()
+		await langGuesser.guess()
 	));
 
 	editor.layout();
