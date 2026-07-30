@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
+import { useElementSize } from '@vueuse/core';
 import InnerImageZoom from 'vue-inner-image-zoom'
 import { Share } from '~/share';
 import { useApiStore } from '@/stores/api';
@@ -13,6 +14,12 @@ apiStore.isPageLoaded = true;
 
 // sometimes images fail to load despite existing, so we'll retry. Is this an r2 propagation issue?
 const attempt = ref(0);
+const naturalWidth = ref(0);
+
+const container = ref<HTMLElement>();
+const { width: containerWidth } = useElementSize(container);
+
+const isFullSize = computed(() => naturalWidth.value > 0 && naturalWidth.value <= containerWidth.value);
 
 function tryLoad(url?: string)
 {
@@ -21,7 +28,10 @@ function tryLoad(url?: string)
 
 	const probe = new Image();
 
-	probe.onload = () => attempt.value++; // bust the :key so the real element (re)mounts
+	probe.onload = () => {
+		naturalWidth.value = probe.naturalWidth;
+		attempt.value++; // bust the :key so the real element (re)mounts
+	};
 	probe.onerror = () => {
 		const delay = Math.min(1000 * 2 ** attempt.value, 10000);
 		attempt.value++;
@@ -33,16 +43,15 @@ function tryLoad(url?: string)
 
 watch(() => share?.fileUrl, (url) => {
 	attempt.value = 0;
+	naturalWidth.value = 0;
 	tryLoad(url);
 }, { immediate: true });
 </script>
 
 <template>
-	<div class="grid place-items-center h-screen">
-		<!--TODO: don't allow zoom if the image is already full size... -->
-
+	<div ref="container" class="grid place-items-center h-screen">
 		<inner-image-zoom
-			v-if="share && share.fileExtension != 'svg'"
+			v-if="share && share.fileExtension != 'svg' && !isFullSize"
 			:key="attempt"
 			:src="share?.fileUrl"
 			moveType="drag"
@@ -52,7 +61,7 @@ watch(() => share?.fileUrl, (url) => {
 		/>
 
 		<!-- this zoomer does not support svgs! -->
-		<img v-else :key="attempt" :src="share?.fileUrl" style="max-width: 75%; width: auto" @error="tryLoad(share?.fileUrl)" />
+		<img v-else :key="attempt" :src="share?.fileUrl" style="max-width: 100%; width: auto" @error="tryLoad(share?.fileUrl)" />
 	</div>
 
 </template>
