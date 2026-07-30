@@ -21,6 +21,13 @@ export class OpenGraphTagGen {
 		this.addTag('twitter:' + property, content);
 	}
 
+	// most embeds don't render svg previews, so use the png fileicon here
+	protected addFileIconImageTag(url: URL, share: Share)
+	{
+		this.addOgTag('image', url.origin + '/fileicon/png/' + share.fileExtension + '.png');
+		this.addOgTag('image:type:', 'image/png');
+	}
+
 	public getTags(url: URL, share: Share): string
 	{
 		this.addOgTag('title', share.fileName!);
@@ -33,8 +40,7 @@ export class OpenGraphTagGen {
 			this.addOgTag('video', share.fileUrl);
 			this.addOgTag('video:type:', share.contentType!);
 
-			this.addOgTag('image', url.origin + '/svg/' + share.fileExtension + '.svg');
-			this.addOgTag('image:type:', 'image/svg+xml');
+			this.addFileIconImageTag(url, share);
 		}
 		else if (share.isAudio())
 		{
@@ -43,8 +49,7 @@ export class OpenGraphTagGen {
 			this.addOgTag('audio', share.fileUrl);
 			this.addOgTag('audio:type:', share.contentType!);
 
-			this.addOgTag('image', url.origin + '/svg/' + share.fileExtension + '.svg');
-			this.addOgTag('image:type:', 'image/svg+xml');
+			this.addFileIconImageTag(url, share);
 		}
 		else if (share.isImage())
 		{
@@ -58,8 +63,7 @@ export class OpenGraphTagGen {
 		else if (share.isText() || share.isFile())
 		{
 			this.addOgTag('type', 'website');
-			this.addOgTag('image', url.origin + '/svg/' + share.fileExtension + '.svg');
-			this.addOgTag('image:type:', 'image/svg+xml');
+			this.addFileIconImageTag(url, share);
 		}
 
 		return this.tags

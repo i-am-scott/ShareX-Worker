@@ -92,7 +92,7 @@ app.get(urlSlugPath, async (c) => {
 
 			const html = (await resp.text())
 				.replace('<title>ShareX-Worker</title>', '<title>' + Helpers.escapeHtml(share.fileName!) + '</title>')
-				.replace('/favicon.ico', '/svg/' + Helpers.escapeHtml(share.fileExtension!) + '.svg')
+				.replace('/favicon.ico', '/fileicon/svg/' + Helpers.escapeHtml(share.fileExtension!) + '.svg')
 				.replace('<meta property="og:title" content="Home"/>', tagGen.getTags(new URL(c.req.url), share));
 
 			return c.html(html, resp);
@@ -104,8 +104,11 @@ app.get(urlSlugPath, async (c) => {
 
 	return resp;
 });
-app.get('/svg/:urlSlug', async (c) => { // todo: add a png version, almost nothing supports svgs!
+app.get('/fileicon/svg/:urlSlug', async (c) => {
 	return FileIcon.create(getUrlSlug(c.req.param('urlSlug')));
+});
+app.get('/fileicon/png/:urlSlug', async (c) => {
+	return FileIcon.createPng(getUrlSlug(c.req.param('urlSlug')));
 });
 
 

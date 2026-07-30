@@ -14,6 +14,7 @@
 		"deploy": "npm run build && wrangler deploy"
 	},
 	"dependencies": {
+		"@cf-wasm/resvg": "^0.3.5",
 		"@lucide/vue": "^1.28.0",
 		"@tanstack/vue-table": "^8.21.2",
 		"@vscode/vscode-languagedetection": "^1.0.23",
