@@ -60,9 +60,12 @@ export class ShareHandler extends ApiHandler {
 			prefix: 'Share:'
 		})
 
-
-		for (let i in data.keys) {
-			data.keys[i] = data.keys[i].metadata;
+		for (let i in data.keys)
+		{
+			data.keys[i] = {
+				...(data.keys[i].metadata as object),
+				expiration: data.keys[i].expiration
+			};
 		}
 
 		data.keys.sort((a: any, b: any) => b.creationDate - a.creationDate);

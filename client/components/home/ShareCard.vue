@@ -33,6 +33,13 @@ const openShare = () => window.open(getShareUrl(), '_blank')?.focus();
 const isDeleting = ref(false);
 const busy = computed(() => isDeleting.value || deleting);
 
+const expiresIn = computed(() => {
+	if (share.expiration == null)
+		return null;
+
+	return Helpers.timeSpanToString(share.expiration * 1000 - Date.now());
+});
+
 const deleteShare = async () => {
 	if (share.urlSlug == null || share.deletetionKey == null)
 		return;
@@ -75,6 +82,7 @@ const deleteShare = async () => {
 			<div class="text-xs text-muted-foreground">
 				{{ new Date(share.creationDate!).toLocaleDateString() }}
 				<template v-if="share.contentSize != null"> &middot; {{ Helpers.bytesToString(share.contentSize) }}</template>
+				<template v-if="expiresIn != null"> &middot; {{ expiresIn }}</template>
 			</div>
 		</div>
 

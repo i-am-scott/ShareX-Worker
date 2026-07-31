@@ -10,5 +10,6 @@ export interface Shareable {
 	contentMd5?: string,
 	deletetionKey?: string;
 	creationDate?: number,
-	expirationTtl?: number
+	expirationTtl?: number,
+	expiration?: number
 }
