@@ -1,6 +1,6 @@
 {
 	"name": "sharex-worker",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"homepage": "https://github.com/aStonePenguin/ShareX-Worker",
 	"private": true,
 	"type": "module",
