@@ -83,6 +83,13 @@ export class ShareHandler extends ApiHandler {
 		return this.responseSuccess(shareData);
 	}
 
+	protected async removeShare(urlSlug: string, shareable: Shareable)
+	{
+		await this.context.env.KV.delete('Share:' + urlSlug)
+		await this.context.env.KV.delete('DeletionQueue:' + urlSlug)
+		await this.context.env.R2.delete(shareable.filePath)
+	}
+
 	public async tryDelete(urlSlug: string, deletetionKey?: string): Promise<Response>
 	{
 		const shareable = await this.get(urlSlug);
@@ -93,11 +100,35 @@ export class ShareHandler extends ApiHandler {
 		if (deletetionKey != null && shareable.deletetionKey !== deletetionKey)
 			return this.responseError('Invalid deletion key!', 404);
 
-		await this.context.env.KV.delete('Share:' + urlSlug)
-		await this.context.env.KV.delete('DeletionQueue:' + urlSlug)
-		await this.context.env.R2.delete(shareable.filePath)
+		await this.removeShare(urlSlug, shareable);
 
 		return this.responseSuccess(true);
+	}
+
+	public async tryBulkDelete(): Promise<Response>
+	{
+		const body = await this.context.req.json().catch(() => null) as { urlSlugs?: string[] } | null;
+
+		if (!Array.isArray(body?.urlSlugs))
+			return this.responseError('Missing urlSlugs!', 422);
+
+		const results = await Promise.allSettled(body.urlSlugs.map(async (urlSlug) => {
+			const shareable = await this.get(urlSlug);
+
+			if (shareable == null)
+				throw new Error('Invalid share!');
+
+			await this.removeShare(urlSlug, shareable);
+		}));
+
+		const errors: Record<string, string> = {};
+
+		results.forEach((result, i) => {
+			if (result.status === 'rejected')
+				errors[body.urlSlugs![i]] = result.reason instanceof Error ? result.reason.message : 'Failed to delete share';
+		});
+
+		return this.responseSuccess({ errors });
 	}
 
 	public async tryShorten(): Promise<Response>

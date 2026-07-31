@@ -146,6 +146,9 @@ app.post('/api/upload', async (c) => {
 app.post('/api/delete' + urlSlugPath, async (c) => {
 	return await (new ShareHandler(c)).tryDelete(c.req.param('urlSlug')!);
 });
+app.post('/api/deletebulk', async (c) => {
+	return await (new ShareHandler(c)).tryBulkDelete();
+});
 app.post('/api/shorten', async (c) => {
 	return await (new ShareHandler(c)).tryShorten();
 });

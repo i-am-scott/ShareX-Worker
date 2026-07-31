@@ -119,6 +119,18 @@ export const useApiStore = defineStore('api', {
 			// error checking here!
 		},
 
+		async bulkDeleteShares(urlSlugs: string[]): Promise<boolean>
+		{
+			const result: ApiResponse = await Http.post('deletebulk', {
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ urlSlugs }),
+			});
+
+			return result.error == null;
+
+			// error checking here!
+		},
+
 		async uploadFile(file: File): Promise<any>
 		{
 			const result = await Http.post('upload', {
