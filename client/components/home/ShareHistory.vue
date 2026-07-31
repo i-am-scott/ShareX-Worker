@@ -184,7 +184,7 @@ const deselectAll = () => {
 
 		<div class="flex items-center justify-end space-x-2 py-4">
 			<div class="flex-1 text-sm text-muted-foreground">
-				{{ table.getFilteredRowModel().rows.length }} item(s) shown.
+				Showing {{ table.getRowModel().rows.length }} of {{ data.length }}
 			</div>
 			<div v-if="table.getPageCount() > 0" class="text-sm text-muted-foreground">
 				Page {{ table.getState().pagination.pageIndex + 1 }} of {{ table.getPageCount() }}
