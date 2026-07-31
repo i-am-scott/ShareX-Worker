@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import ShareHistory from '@/components/home/ShareHistory.vue';
 import ConfigDownloader from '@/components/home/ConfigDownloader.vue'
-
-import { useApiStore } from '@/stores/api';
-const apiStore = useApiStore();
-apiStore.isPageLoaded = true;
-
-
 </script>
 
 <template>

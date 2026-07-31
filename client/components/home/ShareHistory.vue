@@ -25,8 +25,11 @@ const apiStore = useApiStore();
 
 const data = ref<Shareable[]>([]);
 
+apiStore.isPageLoaded = false;
+
 onMounted(async () => {
 	data.value = await apiStore.getShares();
+	apiStore.isPageLoaded = true;
 })
 
 const selectedSlugs = ref<Set<string>>(new Set());
