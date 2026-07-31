@@ -39,11 +39,6 @@ class Helpers extends SharedHelpers {
 		return Helpers.bufferToHex(digest);
 	}
 
-	public static getFileExtension(fileName: string): string
-	{
-		return fileName.split('.').pop() || fileName;
-	}
-
 	public static bufferToHex(buffer: ArrayBuffer): string
 	{
 		return [...new Uint8Array(buffer)]

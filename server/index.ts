@@ -137,6 +137,7 @@ app.post('/api/unauth', async (c) => {
 	return await c.var.sessionHandler.deleteSession();
 });
 app.get('/api/list', async (c) => {
+	c.header('Cache-Control', 'no-store');
 	return await (new ShareHandler(c)).list();
 });
 app.post('/api/upload', async (c) => {

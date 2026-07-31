@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Share } from '~/share';
+import type { Shareable } from '~/share';
 import { FileIconSvg } from '~/fileiconsvg';
 
-const { share } = defineProps({
-	share: Share,
+const props = withDefaults(defineProps<{
+	share?: Shareable,
+	size?: string
+}>(), {
+	size: 'w-32 h-32'
 })
 
-const iconSvg = computed(() => FileIconSvg.build(share?.fileExtension));
+const iconSvg = computed(() => FileIconSvg.build(props.share?.fileExtension));
 </script>
 
 <template>
 	<div class="w-full max-w-sm">
-		<div class="icon mx-auto w-32 h-32" v-html="iconSvg"></div>
+		<div class="icon mx-auto" :class="props.size" v-html="iconSvg"></div>
 	</div>
 </template>
 

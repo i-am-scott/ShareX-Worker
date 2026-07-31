@@ -34,7 +34,8 @@ export class ShareHandler extends ApiHandler {
 				urlSlug: shareable.urlSlug,
 				fileName: shareable.fileName,
 				creationDate: shareable.creationDate,
-				contentSize: shareable.contentSize
+				contentSize: shareable.contentSize,
+				deletetionKey: shareable.deletetionKey
 			}
 		});
 	}

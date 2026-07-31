@@ -26,6 +26,11 @@ export class Helpers {
 		}
 	}
 
+	public static getFileExtension(fileName: string): string
+	{
+		return fileName.split('.').pop() || fileName;
+	}
+
 	public static isNewerVersion(oldVer: string, newVer: string)
 	{
 		const oldParts = oldVer.split('.');
